@@ -1,5 +1,8 @@
 import request from "supertest";
 import app from "../src/app.js";
+import mongoose from "mongoose";
+import User from "../src/models/User.js";
+import Task from "../src/models/Task.js";
 
 let token;
 let taskId;
@@ -56,6 +59,10 @@ describe("Task Routes", () => {
 
     expect(res.statusCode).toBe(200);
     expect(Array.isArray(res.body)).toBe(true);
+  });
+  afterAll(async () => {
+    await Task.deleteMany({}); 
+    await User.deleteMany({}); 
   });
 
 });
